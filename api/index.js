@@ -1,7 +1,5 @@
 "use strict";
 
-require("dotenv").config({ path: require("path").join(__dirname, "../.env") });
-
 const express = require("express");
 const path    = require("path");
 const { v4: uuidv4 } = require("uuid");
@@ -441,4 +439,4 @@ app.get("/forma-options",(_,res)=>res.json(FORMA_DELTA));
 // ─────────────────────────────────────────────
 // Start
 // ─────────────────────────────────────────────
-app.listen(PORT,()=>console.log(`\n🟢  FantaCalcetto Manager → http://localhost:${PORT}\n`));
+module.exports = app;
