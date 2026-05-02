@@ -1,20 +1,18 @@
 /**
  * db.js – Supabase client singleton
- * Reads SUPABASE_URL and SUPABASE_SERVICE_KEY from environment.
+ * Configurato per leggere le variabili d'ambiente direttamente dalla dashboard di Vercel.
  */
 "use strict";
 
-require("dotenv").config({ path: require("path").join(__dirname, "../env.env") });
-
 const { createClient } = require("@supabase/supabase-js");
 
+// Legge le variabili impostate nella dashboard di Vercel (Settings > Environment Variables)
 const url = process.env.SUPABASE_URL;
-const key = process.env.SUPABASE_SERVICE_KEY;
+// Usiamo SUPABASE_ANON_KEY che è il nome che appare nei tuoi screenshot di Vercel
+const key = process.env.SUPABASE_ANON_KEY || process.env.SUPABASE_SERVICE_KEY;
 
 if (!url || !key) {
-  console.error("❌  SUPABASE_URL e SUPABASE_SERVICE_KEY sono obbligatori.");
-  console.error("    Copia .env.example in .env e compila i valori.");
-  process.exit(1);
+  console.error("❌ Errore: SUPABASE_URL o SUPABASE_ANON_KEY non trovate in process.env");
 }
 
 const supabase = createClient(url, key, {
